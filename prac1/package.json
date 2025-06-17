@@ -1,0 +1,19 @@
+{
+  "name": "prac1",
+  "version": "1.0.0",
+  "description": "practice for test",
+  "main": "birds.js",
+  "scripts": {
+    "start": "node birds.js",
+    "dev": "nodemon birds.js"
+  },
+  "author": "saranjoel",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^5.1.0"
+  },
+  "devDependencies": {
+    "nodemon": "^3.1.10"
+  },
+  "keywords": []
+}
