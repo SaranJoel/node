@@ -35,9 +35,14 @@ app.put("/updateCity/:city", (req, res) => {
     return res.status(404).send("provide correct city name");
 
   weather[cityIndex] = {
-    ...weather[cityIndex],
+    ...weather[cityIndex], //✅ What is the Spread Operator in JavaScript?
+    //The spread operator is written as ... (three dots), and it's used to "spread out" the properties of an object or elements of an array.
     ...updateData,
   };
+  //   const obj1 = { a: 1, b: 2 };
+  //   const obj2 = { ...obj1, c: 3 };
+
+  //   console.log(obj2); // { a: 1, b: 2, c: 3 }
 
   res.send(weather);
 });
