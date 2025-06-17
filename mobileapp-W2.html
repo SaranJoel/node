@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Co-op Jobs</title>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        padding: 1em;
+        background-color: #f4f4f4;
+      }
+
+      .nav-bar {
+        position: sticky;
+        top: 0;
+        background: #333;
+        color: white;
+        display: flex;
+        justify-content: space-between;
+        padding: 0.8em;
+        z-index: 100;
+      }
+
+      .nav-bar button {
+        background: #555;
+        color: white;
+        border: none;
+        padding: 0.4em 1em;
+        border-radius: 5px;
+        cursor: pointer;
+      }
+
+      .section {
+        margin-top: 1em;
+      }
+
+      .job-link {
+        cursor: pointer;
+        color: #007bff;
+        font-weight: bold;
+      }
+
+      .job-title {
+        font-size: 1.2em;
+        font-weight: bold;
+      }
+
+      .skills {
+        color: #555;
+        margin: 0.5em 0;
+      }
+
+      button {
+        background-color: #007bff;
+        color: white;
+        border: none;
+        padding: 0.6em 1em;
+        border-radius: 5px;
+        cursor: pointer;
+      }
+
+      .job-image {
+        width: 100%;
+        height: auto;
+        border-radius: 8px;
+        margin-top: 0.5em;
+      }
+    </style>
+  </head>
+  <body>
+    <!-- Navigation Bar -->
+    <div class="nav-bar">
+      <button id="nav-back">⬅ Back</button>
+      <button id="nav-forward">➡ Forward</button>
+    </div>
+
+    <!-- Home Page -->
+    <div id="home-page">
+      <h2>Hello Saran!</h2>
+      <p>These are the co-op jobs available:</p>
+      <div class="job-link" data-id="1">Frontend Developer</div>
+      <div class="job-link" data-id="2">Backend Developer</div>
+    </div>
+
+    <!-- Job Listing Page -->
+    <div id="job-list" style="display: none">
+      <!-- Dynamic Job Cards Go Here -->
+    </div>
+
+    <!-- Job Detail Page -->
+    <div id="job-detail" style="display: none"></div>
+
+    <!-- jQuery -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script>
+      const jobData = {
+        1: {
+          title: "Frontend Developer (React)",
+          description:
+            "Build responsive and interactive UI for a retail e-commerce app using React.",
+          skills: "React, JavaScript, HTML/CSS",
+          image: "https://via.placeholder.com/300x150",
+        },
+        2: {
+          title: "Backend Developer (Java)",
+          description:
+            "Develop and maintain RESTful APIs, manage data access, and optimize performance.",
+          skills: "Java, Spring Boot, SQL",
+          image: "",
+        },
+      };
+
+      let historyStack = [];
+
+      function loadJobList(selectedId) {
+        $("#home-page").hide();
+        $("#job-list").html("").show();
+        historyStack.push("#home-page");
+
+        const job = jobData[selectedId];
+        $("#job-list").append(`
+        <div class="job-card" data-id="${selectedId}">
+          <div class="job-title">${job.title}</div>
+          <div class="skills">Skills: ${job.skills}</div>
+          <p>${job.description}</p>
+          ${job.image ? `<img src="${job.image}" class="job-image"/>` : ""}
+          <br>
+          <button class="view-details">View Details</button>
+        </div>
+      `);
+      }
+
+      function loadJobDetail(jobId) {
+        const job = jobData[jobId];
+        $("#job-list").hide();
+        historyStack.push("#job-list");
+
+        $("#job-detail")
+          .html(
+            `
+        <div class="job-detail">
+          <div class="job-title">${job.title}</div>
+          <div class="skills">Skills Required: ${job.skills}</div>
+          <p>${job.description}</p>
+          ${job.image ? `<img src="${job.image}" class="job-image"/>` : ""}
+          <br><br>
+          <button class="apply-btn">Apply</button>
+        </div>
+      `
+          )
+          .show();
+      }
+
+      // Click handlers
+      $(".job-link").on("click", function () {
+        const jobId = $(this).data("id");
+        loadJobList(jobId);
+      });
+
+      $(document).on("click", ".view-details", function () {
+        const jobId = $(this).closest(".job-card").data("id");
+        loadJobDetail(jobId);
+      });
+
+      $("#nav-back").on("click", function () {
+        const lastPage = historyStack.pop();
+        if (lastPage === "#job-list") {
+          $("#job-detail").hide();
+          $("#job-list").show();
+        } else if (lastPage === "#home-page") {
+          $("#job-list").hide();
+          $("#job-detail").hide();
+          $("#home-page").show();
+        }
+      });
+
+      $("#nav-forward").on("click", function () {
+        alert("Forward navigation not implemented in this demo.");
+      });
+    </script>
+  </body>
+</html>

@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <title>Co-op Job Postings</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link
+      rel="stylesheet"
+      href="https://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.css"
+    />
+    <script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
+    <script src="https://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.js"></script>
+  </head>
+  <body>
+    <!-- Home Page -->
+    <div data-role="page" id="home">
+      <div data-role="header">
+        <h1>Co-op Job List</h1>
+      </div>
+
+      <div data-role="content">
+        <ul data-role="listview" data-inset="true">
+          <!-- Job Posting 1 -->
+          <li>
+            <a href="#job1">
+              <h2>Frontend Developer</h2>
+              <p>Build UI using React and Tailwind.</p>
+              <p><strong>Skills:</strong> HTML, CSS, JavaScript, React</p>
+            </a>
+          </li>
+
+          <!-- Job Posting 2 -->
+          <li>
+            <a href="#job2">
+              <h2>Backend Developer</h2>
+              <p>Develop APIs and manage databases.</p>
+              <p><strong>Skills:</strong> Node.js, Express, MongoDB</p>
+            </a>
+          </li>
+
+          <!-- Job Posting 3 -->
+          <li>
+            <a href="#job3">
+              <h2>Full Stack Developer</h2>
+              <p>
+                Develop frontend and backend solutions with Node.js and React.
+              </p>
+              <p>
+                <strong>Skills:</strong> JavaScript, Node.js, React, MongoDB
+              </p>
+            </a>
+          </li>
+
+          <!-- Job Posting 4 -->
+          <li>
+            <a href="#job4">
+              <h2>Mobile Developer</h2>
+              <p>Create cross-platform apps using Flutter.</p>
+              <p><strong>Skills:</strong> Flutter, Dart, Firebase</p>
+            </a>
+          </li>
+
+          <!-- Job Posting 5 -->
+          <li>
+            <a href="#job5">
+              <h2>Data Scientist</h2>
+              <p>Analyze data and build predictive models with Python.</p>
+              <p><strong>Skills:</strong> Python, Machine Learning, Pandas</p>
+            </a>
+          </li>
+        </ul>
+      </div>
+
+      <div data-role="footer" data-position="fixed">
+        <div data-role="navbar">
+          <ul>
+            <li><a href="#" data-rel="back" class="ui-btn-active">Back</a></li>
+            <li><a href="#home">Home</a></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <!-- Job Detail Page 1 -->
+    <div data-role="page" id="job1">
+      <div data-role="header">
+        <h1>Frontend Developer</h1>
+      </div>
+
+      <div data-role="content">
+        <p><strong>Job Description:</strong></p>
+        <p>
+          We're looking for a creative frontend developer to build responsive
+          UIs using modern frameworks.
+        </p>
+
+        <p><strong>Required Skills:</strong></p>
+        <ul>
+          <li>HTML</li>
+          <li>CSS</li>
+          <li>JavaScript</li>
+          <li>React</li>
+          <li>Tailwind CSS</li>
+        </ul>
+
+        <a href="#" class="ui-btn ui-btn-b">Apply</a>
+      </div>
+
+      <div data-role="footer" data-position="fixed">
+        <div data-role="navbar">
+          <ul>
+            <li><a href="#" data-rel="back">Back</a></li>
+            <li><a href="#home">Home</a></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <!-- Job Detail Page 2 -->
+    <div data-role="page" id="job2">
+      <div data-role="header">
+        <h1>Backend Developer</h1>
+      </div>
+
+      <div data-role="content">
+        <p><strong>Job Description:</strong></p>
+        <p>
+          Join our backend team to create scalable APIs and manage cloud
+          databases.
+        </p>
+
+        <p><strong>Required Skills:</strong></p>
+        <ul>
+          <li>Node.js</li>
+          <li>Express</li>
+          <li>MongoDB</li>
+          <li>REST APIs</li>
+        </ul>
+
+        <a href="#" class="ui-btn ui-btn-b">Apply</a>
+      </div>
+
+      <div data-role="footer" data-position="fixed">
+        <div data-role="navbar">
+          <ul>
+            <li><a href="#" data-rel="back">Back</a></li>
+            <li><a href="#home">Home</a></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <!-- Job Detail Page 3 -->
+    <div data-role="page" id="job3">
+      <div data-role="header">
+        <h1>Full Stack Developer</h1>
+      </div>
+
+      <div data-role="content">
+        <p><strong>Job Description:</strong></p>
+        <p>
+          We are looking for a full stack developer to create web applications
+          with Node.js and React.
+        </p>
+
+        <p><strong>Required Skills:</strong></p>
+        <ul>
+          <li>Node.js</li>
+          <li>React</li>
+          <li>MongoDB</li>
+          <li>Express</li>
+        </ul>
+
+        <a href="#" class="ui-btn ui-btn-b">Apply</a>
+      </div>
+
+      <div data-role="footer" data-position="fixed">
+        <div data-role="navbar">
+          <ul>
+            <li><a href="#" data-rel="back">Back</a></li>
+            <li><a href="#home">Home</a></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <!-- Job Detail Page 4 -->
+    <div data-role="page" id="job4">
+      <div data-role="header">
+        <h1>Mobile Developer</h1>
+      </div>
+
+      <div data-role="content">
+        <p><strong>Job Description:</strong></p>
+        <p>
+          Create cross-platform mobile applications using Flutter to deliver
+          high-quality apps.
+        </p>
+
+        <p><strong>Required Skills:</strong></p>
+        <ul>
+          <li>Flutter</li>
+          <li>Dart</li>
+          <li>Firebase</li>
+        </ul>
+
+        <a href="#" class="ui-btn ui-btn-b">Apply</a>
+      </div>
+
+      <div data-role="footer" data-position="fixed">
+        <div data-role="navbar">
+          <ul>
+            <li><a href="#" data-rel="back">Back</a></li>
+            <li><a href="#home">Home</a></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <!-- Job Detail Page 5 -->
+    <div data-role="page" id="job5">
+      <div data-role="header">
+        <h1>Data Scientist</h1>
+      </div>
+
+      <div data-role="content">
+        <p><strong>Job Description:</strong></p>
+        <p>
+          Join our team to analyze large datasets and build predictive models
+          with Python.
+        </p>
+
+        <p><strong>Required Skills:</strong></p>
+        <ul>
+          <li>Python</li>
+          <li>Machine Learning</li>
+          <li>Pandas</li>
+        </ul>
+
+        <a href="#" class="ui-btn ui-btn-b">Apply</a>
+      </div>
+
+      <div data-role="footer" data-position="fixed">
+        <div data-role="navbar">
+          <ul>
+            <li><a href="#" data-rel="back">Back</a></li>
+            <li><a href="#home">Home</a></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>

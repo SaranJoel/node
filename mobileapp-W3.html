@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Co-op Jobs</title>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        padding: 1em;
+        background-color: #f4f4f4;
+      }
+
+      .nav-bar {
+        position: sticky;
+        top: 0;
+        background: #333;
+        color: white;
+        display: flex;
+        justify-content: space-between;
+        padding: 0.8em;
+        z-index: 100;
+      }
+
+      .nav-bar button {
+        background: #555;
+        color: white;
+        border: none;
+        padding: 0.4em 1em;
+        border-radius: 5px;
+        cursor: pointer;
+      }
+
+      .filter-toggle {
+        background: #007bff;
+        color: white;
+        padding: 0.5em 1em;
+        border: none;
+        border-radius: 5px;
+        margin-top: 1em;
+        cursor: pointer;
+      }
+
+      .filters {
+        display: none;
+        margin-top: 1em;
+        background: #fff;
+        padding: 1em;
+        border-radius: 5px;
+      }
+
+      .job-card {
+        background: white;
+        margin: 1em 0;
+        padding: 1em;
+        border-radius: 8px;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+      }
+
+      .job-title {
+        font-size: 1.2em;
+        font-weight: bold;
+      }
+
+      .skills {
+        color: #555;
+        margin: 0.5em 0;
+      }
+
+      button {
+        background-color: #007bff;
+        color: white;
+        border: none;
+        padding: 0.6em 1em;
+        border-radius: 5px;
+        cursor: pointer;
+      }
+
+      .job-image {
+        width: 100%;
+        height: auto;
+        border-radius: 8px;
+        margin-top: 0.5em;
+      }
+    </style>
+  </head>
+  <body>
+    <!-- Navigation Bar -->
+    <div class="nav-bar">
+      <button id="nav-back">⬅ Back</button>
+      <button id="nav-forward">➡ Forward</button>
+    </div>
+
+    <!-- Home Page -->
+    <div id="home-page">
+      <h2>Hello Saran!</h2>
+      <p>These are the co-op jobs available:</p>
+      <button class="filter-toggle">🔽 Filter Jobs</button>
+      <div class="filters">
+        <label
+          >Filter by skill:
+          <select id="skill-filter">
+            <option value="">All</option>
+            <option value="React">React</option>
+            <option value="Java">Java</option>
+            <option value="SQL">SQL</option>
+          </select>
+        </label>
+      </div>
+      <div id="job-list"></div>
+    </div>
+
+    <!-- Job Detail Page -->
+    <div id="job-detail" style="display: none"></div>
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script>
+      const jobData = {
+        1: {
+          title: "Frontend Developer (React)",
+          description: "Build responsive UI for e-commerce using React.",
+          skills: "React, JavaScript, HTML/CSS",
+          image: "https://via.placeholder.com/300x150",
+        },
+        2: {
+          title: "Backend Developer (Java)",
+          description: "Develop REST APIs and database logic using Java.",
+          skills: "Java, Spring Boot, SQL",
+          image: "",
+        },
+      };
+
+      let historyStack = [];
+      let currentPage = "#home-page";
+
+      function renderJobList(filterSkill = "") {
+        const jobListEl = $("#job-list").html("");
+        for (const id in jobData) {
+          const job = jobData[id];
+          if (!filterSkill || job.skills.includes(filterSkill)) {
+            jobListEl.append(`
+            <div class="job-card" data-id="${id}">
+              <div class="job-title">${job.title}</div>
+              <div class="skills">Skills: ${job.skills}</div>
+              <p>${job.description}</p>
+              ${job.image ? `<img src="${job.image}" class="job-image"/>` : ""}
+              <br>
+              <button class="view-details">View Details</button>
+            </div>
+          `);
+          }
+        }
+      }
+
+      function loadJobDetail(jobId) {
+        const job = jobData[jobId];
+        historyStack.push(currentPage);
+        currentPage = "#job-detail";
+
+        $("#home-page").hide();
+        $("#job-detail")
+          .html(
+            `
+        <div class="job-card">
+          <div class="job-title">${job.title}</div>
+          <div class="skills">Skills Required: ${job.skills}</div>
+          <p>${job.description}</p>
+          ${job.image ? `<img src="${job.image}" class="job-image"/>` : ""}
+          <br><br>
+          <button class="apply-btn">Apply</button>
+          <br><br>
+          <button id="back-to-list">⬅ Back to List</button>
+        </div>
+      `
+          )
+          .show();
+      }
+
+      // Initial render
+      $(document).ready(function () {
+        renderJobList();
+
+        // View details
+        $(document).on("click", ".view-details", function () {
+          const jobId = $(this).closest(".job-card").data("id");
+          loadJobDetail(jobId);
+        });
+
+        // Back button
+        $(document).on("click", "#nav-back", function () {
+          const last = historyStack.pop();
+          if (last === "#home-page") {
+            $("#job-detail").hide();
+            $("#home-page").show();
+            currentPage = "#home-page";
+          }
+        });
+
+        // Back to List from details
+        $(document).on("click", "#back-to-list", function () {
+          $("#job-detail").hide();
+          $("#home-page").show();
+          currentPage = "#home-page";
+        });
+
+        // Forward (demo only)
+        $("#nav-forward").on("click", function () {
+          alert("Forward navigation not implemented.");
+        });
+
+        // Toggle filters
+        $(".filter-toggle").on("click", function () {
+          $(".filters").slideToggle();
+        });
+
+        // Filter change
+        $("#skill-filter").on("change", function () {
+          const skill = $(this).val();
+          renderJobList(skill);
+        });
+      });
+    </script>
+  </body>
+</html>

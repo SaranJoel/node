@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>JavaScript Assignment</title>
+    <style>
+      #coordinates {
+        margin-top: 10px;
+        padding: 10px;
+        border: 1px solid black;
+        width: fit-content;
+      }
+      .hover-btn {
+        margin-top: 10px;
+      }
+    </style>
+  </head>
+  <body>
+    <!-- Inputs for Task 7 -->
+    <input type="number" id="rows" placeholder="Enter number of rows" />
+    <input type="number" id="cols" placeholder="Enter number of columns" />
+    <button onclick="createTable()">Create Table</button>
+    <div id="table-container"></div>
+
+    <br /><br />
+
+    <!-- Button for Task 1 -->
+    <button onclick="removeTextFields()">Remove All Text Fields</button>
+
+    <!-- Button for Task 2 -->
+    <button onclick="addGreenParagraph()">Add Green Paragraph</button>
+
+    <!-- Button for Task 3 -->
+    <button onclick="removeElementById('demo')">Remove Element by ID</button>
+    <div id="error-message"></div>
+
+    <!-- Button for Task 4 -->
+    <button id="clickMe">Click Me</button>
+
+    <!-- Task 3 Target -->
+    <div id="demo">I am demo element</div>
+
+    <!-- Button for Task 5 -->
+    <button class="hover-btn" id="hoverButton">Hover Your Mouse Here</button>
+
+    <!-- Div for Task 6 -->
+    <div id="coordinates">Coordinates: (x, y)</div>
+
+    <script>
+      // Task 1 – Remove all text fields
+      function removeTextFields() {
+        const inputs = document.querySelectorAll(
+          'input[type="text"], input[type="number"]'
+        );
+        inputs.forEach((input) => input.remove());
+      }
+
+      // Task 2 – Add green paragraph
+      function addGreenParagraph() {
+        const p = document.createElement("p");
+        p.textContent = "New Paragraph Added";
+        p.style.color = "green";
+        p.style.fontSize = "12px";
+        document.body.appendChild(p);
+      }
+
+      // Task 3 – Remove element by ID
+      function removeElementById(id) {
+        const element = document.getElementById(id);
+        const errorMessageDiv = document.getElementById("error-message");
+        errorMessageDiv.textContent = ""; // Clear old message
+
+        if (element) {
+          element.remove();
+          console.log(`Element with ID '${id}' removed.`);
+        } else {
+          const message = `❌ Element with ID '${id}' not found.`;
+          console.error(message);
+          errorMessageDiv.textContent = message;
+        }
+      }
+      // Task 4 – Add click event to "Click Me"
+      document.getElementById("clickMe").addEventListener("click", () => {
+        const p = document.createElement("p");
+        p.textContent = "Paragraph added by clicking 'Click Me'!";
+        document.body.appendChild(p);
+      });
+
+      // Task 5 – Hover + Duplicate Button
+      function setupHoverButton(button) {
+        button.addEventListener("mouseover", () => {
+          button.style.backgroundColor = "red";
+        });
+        button.addEventListener("mouseout", () => {
+          button.style.backgroundColor = "";
+        });
+        button.addEventListener("click", () => {
+          const clone = button.cloneNode(true);
+          setupHoverButton(clone);
+          document.body.appendChild(clone);
+        });
+      }
+      setupHoverButton(document.getElementById("hoverButton"));
+
+      // Task 6 – Display mouse coordinates
+      document.addEventListener("mousemove", (e) => {
+        const coordDiv = document.getElementById("coordinates");
+        coordDiv.textContent = `Coordinates: (${e.clientX}, ${e.clientY})`;
+      });
+
+      // Task 7 – Create dynamic table with validation
+      function createTable() {
+        const rows = document.getElementById("rows").value;
+        const cols = document.getElementById("cols").value;
+
+        if (rows <= 0 || cols <= 0 || isNaN(rows) || isNaN(cols)) {
+          alert("Please enter valid positive integers for rows and columns.");
+          return;
+        }
+
+        const table = document.createElement("table");
+        table.border = "1";
+
+        const thead = document.createElement("thead");
+        const headerRow = document.createElement("tr");
+        for (let c = 0; c < cols; c++) {
+          const th = document.createElement("th");
+          th.textContent = `Header ${c + 1}`;
+          headerRow.appendChild(th);
+        }
+        thead.appendChild(headerRow);
+        table.appendChild(thead);
+
+        const tbody = document.createElement("tbody");
+        for (let r = 0; r < rows; r++) {
+          const row = document.createElement("tr");
+          for (let c = 0; c < cols; c++) {
+            const td = document.createElement("td");
+            td.textContent = Math.floor(Math.random() * 100) + 1;
+            row.appendChild(td);
+          }
+          tbody.appendChild(row);
+        }
+        table.appendChild(tbody);
+
+        const container = document.getElementById("table-container");
+        container.innerHTML = "";
+        container.appendChild(table);
+      }
+    </script>
+  </body>
+</html>
